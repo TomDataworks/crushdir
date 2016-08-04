@@ -42,7 +42,8 @@ int main(int argc, char** argv) {
 }
 
 int crush(const char *name, const struct stat *status, int type) {
-  char *file = strdup(name);
+  char *namec, *file;
+  namec = file = strdup(name);
   file = basename(file);
 
   if(type == FTW_F) {
@@ -59,6 +60,8 @@ int crush(const char *name, const struct stat *status, int type) {
     }
     wait(child_pid);
   }
+
+  free(namec);
 
   return 0;
 }
